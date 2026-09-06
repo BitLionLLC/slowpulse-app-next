@@ -1,0 +1,155 @@
+@import "tailwindcss";
+
+/* Dark mode is driven by a class on <html>, set before paint by the inline
+   script in the root layout. The media query alone can't express "system by
+   default, user override wins". */
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* The SlowPulse palette, lifted from lib/core/theme/app_theme.dart so the
+   site and the app can't drift. `--accent` is the one token that changes
+   value between themes: the neon pulse is unreadable as text on white, so
+   light mode uses the deep variant — same rule as AppPalette.accent. */
+:root {
+  --pulse: #37b6ff;
+  --pulse-bright: #8ad6ff;
+  --pulse-deep: #0b6fa8;
+  --on-pulse: #001019;
+
+  --warn: #f5a524;
+  --impulse: #ff4e6a;
+  --planned: #16c79a;
+  --gift: #a97bff;
+  --replacement: #37b6ff;
+
+  --background: #f4f7fa;
+  --surface: #ffffff;
+  --surface-high: #e9eff5;
+  --outline: #d5dfe8;
+  --ink: #0b1116;
+  --muted: #5a6b7b;
+  --accent: var(--pulse-deep);
+  --glow: rgb(55 182 255 / 0.14);
+  --grid-line: rgb(11 111 168 / 0.07);
+}
+
+.dark {
+  --background: #000000;
+  --surface: #0b1116;
+  --surface-high: #131c24;
+  --outline: #1e2c38;
+  --ink: #edf4f9;
+  --muted: #93a6b6;
+  --accent: var(--pulse);
+  --glow: rgb(55 182 255 / 0.22);
+  --grid-line: rgb(55 182 255 / 0.06);
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-surface: var(--surface);
+  --color-surface-high: var(--surface-high);
+  --color-outline: var(--outline);
+  --color-ink: var(--ink);
+  --color-muted: var(--muted);
+  --color-accent: var(--accent);
+  --color-pulse: var(--pulse);
+  --color-pulse-bright: var(--pulse-bright);
+  --color-pulse-deep: var(--pulse-deep);
+  --color-on-pulse: var(--on-pulse);
+  --color-warn: var(--warn);
+  --color-impulse: var(--impulse);
+  --color-planned: var(--planned);
+  --color-gift: var(--gift);
+  --color-replacement: var(--replacement);
+
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+
+  --radius-card: 20px;
+  --radius-control: 14px;
+
+  --animate-breathe: breathe 4s ease-in-out infinite;
+  --animate-ring: ring 3.6s cubic-bezier(0.2, 0.6, 0.3, 1) infinite;
+  --animate-rise: rise 0.7s cubic-bezier(0.16, 1, 0.3, 1) both;
+
+  @keyframes breathe {
+    0%,
+    100% {
+      transform: scale(1);
+      opacity: 0.85;
+    }
+    50% {
+      transform: scale(1.06);
+      opacity: 1;
+    }
+  }
+
+  @keyframes ring {
+    0% {
+      transform: scale(0.72);
+      opacity: 0.55;
+    }
+    70% {
+      opacity: 0;
+    }
+    100% {
+      transform: scale(1.5);
+      opacity: 0;
+    }
+  }
+
+  @keyframes rise {
+    from {
+      opacity: 0;
+      transform: translateY(14px);
+    }
+    to {
+      opacity: 1;
+      transform: none;
+    }
+  }
+}
+
+* {
+  border-color: var(--outline);
+}
+
+html {
+  scroll-behavior: smooth;
+  color-scheme: light;
+}
+
+.dark html,
+html.dark {
+  color-scheme: dark;
+}
+
+body {
+  background: var(--background);
+  color: var(--ink);
+  -webkit-font-smoothing: antialiased;
+}
+
+::selection {
+  background: var(--glow);
+  color: var(--ink);
+}
+
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+  border-radius: 6px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}
