@@ -17,9 +17,9 @@ export const site = {
   eulaUrl: "https://www.apple.com/legal/internet-services/itunes/dev/stdeula/",
   maker: "BitLion",
   makerUrl: "https://thebitlion.com",
-  /** Store listings aren't live yet. Fill these in and the hero, nav and
-   *  closing CTA all switch from "notify me" to real download buttons. */
-  appStoreUrl: "",
+  /** Fill a store URL in and the hero, nav and closing CTA switch from
+   *  "notify me" to real download buttons. iOS is live; Android isn't yet. */
+  appStoreUrl: "https://apps.apple.com/us/app/slowpulse/id6804510242",
   playStoreUrl: "",
   /** Mirrors Billing.freeGuardedAppLimit. */
   freeGuardedAppLimit: 1,

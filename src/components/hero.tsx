@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { AndroidIcon, AppleIcon, ArrowIcon } from "./icons";
 import { InterventionScreen, InsightsScreen, PhoneFrame } from "./phone";
 import { site, storeLive } from "@/lib/site";
@@ -71,12 +72,16 @@ export function Hero() {
           <div id="get" className="mt-8 flex flex-wrap items-center gap-3 scroll-mt-24">
             {storeLive ? (
               <>
-                {site.appStoreUrl && (
-                  <StoreButton href={site.appStoreUrl} icon={<AppleIcon className="h-5 w-5" />} sub="Download on the" name="App Store" primary />
-                )}
+                {site.appStoreUrl && <AppStoreBadge href={site.appStoreUrl} />}
                 {site.playStoreUrl && (
                   <StoreButton href={site.playStoreUrl} icon={<AndroidIcon className="h-5 w-5" />} sub="Get it on" name="Google Play" />
                 )}
+                <a
+                  href="#how"
+                  className="inline-flex items-center gap-2 rounded-[14px] border-[1.4px] border-accent/55 px-6 py-3.5 text-[15px] font-semibold text-accent transition-colors hover:bg-[var(--glow)]"
+                >
+                  How the pause works
+                </a>
               </>
             ) : (
               <>
@@ -140,6 +145,39 @@ export function Hero() {
         </div>
       </div>
     </section>
+  );
+}
+
+/** Apple's supplied badge, which its marketing guidelines require us to use
+ *  unaltered. Two files rather than one recolored by CSS: the black badge is
+ *  only legible on the light theme, the white one only on the dark theme, and
+ *  the paths are Apple's artwork either way. */
+function AppStoreBadge({ href }: { href: string }) {
+  return (
+    <a
+      href={href}
+      target="_blank"
+      rel="noreferrer"
+      className="inline-block transition-transform hover:-translate-y-0.5"
+    >
+      <Image
+        src="/app-store-badge.svg"
+        alt="Download SlowPulse on the App Store"
+        width={144}
+        height={48}
+        priority
+        className="h-12 w-auto dark:hidden"
+      />
+      <Image
+        src="/app-store-badge-dark.svg"
+        alt=""
+        aria-hidden
+        width={144}
+        height={48}
+        priority
+        className="hidden h-12 w-auto dark:block"
+      />
+    </a>
   );
 }
 
