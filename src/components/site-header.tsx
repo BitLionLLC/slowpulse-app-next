@@ -3,11 +3,13 @@ import { Logo, Wordmark } from "./logo";
 import { ThemeToggle } from "./theme-toggle";
 import { site, storeLive } from "@/lib/site";
 
+// Root-relative so the nav still lands somewhere from /apps, where none
+// of these sections exist.
 const NAV = [
-  { href: "#how", label: "How it works" },
-  { href: "#features", label: "Features" },
-  { href: "#pricing", label: "Pricing" },
-  { href: "#faq", label: "FAQ" },
+  { href: "/#how", label: "How it works" },
+  { href: "/#features", label: "Features" },
+  { href: "/#pricing", label: "Pricing" },
+  { href: "/#faq", label: "FAQ" },
 ];
 
 export function SiteHeader() {
@@ -21,24 +23,24 @@ export function SiteHeader() {
 
         <nav className="ml-2 hidden items-center gap-1 md:flex">
           {NAV.map((item) => (
-            <a
+            <Link
               key={item.href}
               href={item.href}
               className="rounded-full px-3 py-2 text-[13.5px] font-medium text-muted transition-colors hover:bg-[var(--surface-high)] hover:text-ink"
             >
               {item.label}
-            </a>
+            </Link>
           ))}
         </nav>
 
         <div className="ml-auto flex items-center gap-3">
           <ThemeToggle />
-          <a
-            href="#get"
+          <Link
+            href="/#get"
             className="hidden rounded-full bg-pulse px-4 py-2 text-[13px] font-bold text-[var(--on-pulse)] transition-opacity hover:opacity-90 sm:inline-flex"
           >
             {storeLive ? "Download" : "Get early access"}
-          </a>
+          </Link>
         </div>
       </div>
     </header>

@@ -54,6 +54,10 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
     <html
       lang="en"
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
+      // The nav's section links are now root-relative ("/#how"), so they
+      // scroll on a route transition rather than in-page. This tells Next
+      // the smooth scroll in globals.css is deliberate.
+      data-scroll-behavior="smooth"
       // The inline script below rewrites this before paint; the attribute is
       // only the server's best guess, so React shouldn't complain about it.
       suppressHydrationWarning
