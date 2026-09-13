@@ -25,6 +25,10 @@ export const site = {
   freeGuardedAppLimit: 1,
   /** Mirrors Billing.proName. */
   proName: "SlowPulse Pro",
+  /** GA4 measurement ID. Public by design — it ships in the page either way,
+   *  so it lives here rather than in an env file the deploy has to be told
+   *  about. Only loaded in production builds; see src/app/layout.tsx. */
+  gaId: "G-SENXE7012P",
 } as const;
 
 export const storeLive = Boolean(site.appStoreUrl || site.playStoreUrl);
