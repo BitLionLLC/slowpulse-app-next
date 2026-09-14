@@ -26,10 +26,20 @@ export const metadata: Metadata = {
     "mindful spending",
     "digital wellbeing",
   ],
+  authors: [{ name: site.maker, url: site.makerUrl }],
+  creator: site.maker,
+  publisher: site.maker,
+  // The share card itself lives in src/app/opengraph-image.tsx and
+  // src/app/twitter-image.tsx; Next appends the generated og:image and
+  // twitter:image tags (with type, width, height and alt) to the blocks
+  // below, and any route with its own card overrides them. Facebook and
+  // LinkedIn both read plain Open Graph — neither needs its own namespace,
+  // and fb:app_id is only for Facebook's comment plugins, not previews.
   openGraph: {
     type: "website",
     url: site.url,
     siteName: site.name,
+    locale: "en_US",
     title: `${site.name} — the pause before the purchase`,
     description: site.description,
   },
@@ -37,6 +47,11 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: `${site.name} — the pause before the purchase`,
     description: site.description,
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: { index: true, follow: true, "max-image-preview": "large" },
   },
 };
 

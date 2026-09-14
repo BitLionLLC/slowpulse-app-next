@@ -10,10 +10,21 @@ export const metadata: Metadata = {
   title: "Other apps by BitLion",
   description: `The rest of what ${site.maker} makes — the apps, browser extensions and web tools that live alongside ${site.name}.`,
   alternates: { canonical: "/apps" },
+  // `openGraph` and `twitter` are replaced wholesale per route, not merged
+  // into the root layout's, so the boilerplate is repeated here on purpose —
+  // leave it out and this page ships without og:type or og:site_name.
   openGraph: {
+    type: "website",
+    url: "/apps",
+    siteName: site.name,
+    locale: "en_US",
     title: `Other apps by ${site.maker}`,
     description: `The rest of what ${site.maker} makes, alongside ${site.name}.`,
-    url: "/apps",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: `Other apps by ${site.maker}`,
+    description: `The rest of what ${site.maker} makes, alongside ${site.name}.`,
   },
 };
 
